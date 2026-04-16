@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة فصل 1/6 - محمود حسين</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            -[span_6](start_span)-primary: #1e3a8a;[span_6](end_span)
+            -[span_7](start_span)-secondary: #10b981;[span_7](end_span)
+            -[span_8](start_span)-accent: #f59e0b;[span_8](end_span)
+            -[span_9](start_span)-bg: #f1f5f9;[span_9](end_span)
+        }
+        body { 
+            [span_10](start_span)font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;[span_10](end_span)
+            [span_11](start_span)background: var(--bg);[span_11](end_span)
+            margin: 0; 
+            padding-bottom: 80px; 
+            [span_12](start_span)color: #333;[span_12](end_span)
+        }
+        .header { 
+            [span_13](start_span)background: linear-gradient(135deg, var(--primary), #1e40af);[span_13](end_span)
+            color: white; 
+            text-align: center; 
+            padding: 30px 15px; 
+            [span_14](start_span)border-radius: 0 0 30px 30px;[span_14](end_span)
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        [span_15](start_span).container { max-width: 900px; margin: auto; padding: 10px;[span_15](end_span) }
+        .card { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 20px; 
+            [span_16](start_span)margin-bottom: 20px;[span_16](end_span)
+            [span_17](start_span)box-shadow: 0 4px 10px rgba(0,0,0,0.05);[span_17](end_span)
+        }
+        .card-title { 
+            display: flex; 
+            [span_18](start_span)align-items: center;[span_18](end_span)
+            gap: 10px; 
+            color: var(--primary); 
+            font-size: 1.2rem; 
+            margin-bottom: 15px; 
+            [span_19](start_span)border-right: 4px solid var(--secondary);[span_19](end_span)
+            [span_20](start_span)padding-right: 10px;[span_20](end_span)
+        }
+        .quran-container { 
+            position: relative; 
+            padding-bottom: 150%; 
+            height: 0; 
+            overflow: hidden; 
+            [span_21](start_span)border-radius: 15px;[span_21](end_span)
+        }
+        .quran-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            [span_22](start_span)width: 100%;[span_22](end_span)
+            height: 100%; 
+            [span_23](start_span)border: none;[span_23](end_span)
+        }
+        .prayer-list { 
+            display: grid; 
+            [span_24](start_span)grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));[span_24](end_span)
+            [span_25](start_span)gap: 10px;[span_25](end_span)
+        }
+        .prayer-box { 
+            background: #f8fafc; 
+            padding: 12px; 
+            [span_26](start_span)border-radius: 12px;[span_26](end_span)
+            border: 2px solid #e2e8f0; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+        .prayer-box.active { 
+            [span_27](start_span)border-color: var(--secondary);[span_27](end_span)
+            background: #ecfdf5; 
+            font-weight: bold;
+        }
+        [span_28](start_span).prayer-box input { display: none;[span_28](end_span) }
+        .search-input { 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 10px; 
+            [span_29](start_span)border: 1px solid #ddd;[span_29](end_span)
+            margin-bottom: 15px; 
+            outline: none; 
+            box-sizing: border-box;
+        }
+        .names-grid { 
+            display: grid; 
+            [span_30](start_span)grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));[span_30](end_span)
+            gap: 8px; 
+            max-height: 300px; 
+            [span_31](start_span)overflow-y: auto;[span_31](end_span)
+            padding: 5px;
+        }
+        .name-tag { 
+            background: #f1f5f9; 
+            [span_32](start_span)padding: 10px;[span_32](end_span)
+            border-radius: 8px; 
+            font-size: 0.85rem; 
+            border: 1px solid #e2e8f0;
+        }
+        .student-count { font-size: 0.9rem; color: #666; margin-bottom: 10px; display: block; }
+        [span_33](start_span)table { width: 100%; border-collapse: collapse; font-size: 0.8rem;[span_33](end_span) text-align: center; }
+        [span_34](start_span)th, td { border: 1px solid #ddd; padding: 10px;[span_34](end_span) }
+        [span_35](start_span)th { background: var(--primary); color: white;[span_35](end_span) }
+        tr:nth-child(even) { background: #f9fafb; }
+        .nav-bottom { 
+            position: fixed; 
+            bottom: 0; 
+            width: 100%; 
+            background: white; 
+            [span_36](start_span)display: flex;[span_36](end_span)
+            justify-content: space-around; 
+            padding: 10px 0; 
+            border-top: 2px solid #eee; 
+            [span_37](start_span)z-index: 100;[span_37](end_span)
+        }
+        [span_38](start_span).nav-item { color: #666; text-decoration: none; text-align: center; font-size: 0.7rem;[span_38](end_span) }
+        [span_39](start_span).nav-item i { font-size: 1.2rem; display: block;[span_39](end_span) }
+        [span_40](start_span).nav-item.active { color: var(--primary);[span_40](end_span) }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>موقع فصل 1/6 المطور</h2>
+    <p>بإشراف الطالب: محمود حسين</p>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-title"><i class="fas fa-quran"></i> المصحف الإلكتروني الكامل</div>
+        <div class="quran-container">
+            [span_41](start_span)<iframe src="https://quran.ksu.edu.eg/m.php?l=ar#aya=1_1"></iframe>[span_41](end_span)
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-check-double"></i> متابعة الصلوات اليومية</div>
+        <div class="prayer-list" id="prayerList">
+            [span_42](start_span)<label class="prayer-box"><input type="checkbox" data-prayer="fajr">الفجر</label>[span_42](end_span)
+            <label class="prayer-box"><input type="checkbox" data-prayer="dhuhr">الظهر</label>
+            <label class="prayer-box"><input type="checkbox" data-prayer="asr">العصر</label>
+            <label class="prayer-box"><input type="checkbox" data-prayer="maghrib">المغرب</label>
+            <label class="prayer-box"><input type="checkbox" data-prayer="isha">العشاء</label>
+        </div>
+    </div>
+
+    <div class="card">
+        [span_43](start_span)<div class="card-title"><i class="fas fa-calendar-alt"></i> الجدول الدراسي</div>[span_43](end_span)
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr><th>اليوم</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+                </thead>
+                <tbody>
+                    [span_44](start_span)<tr><td>الأحد</td><td>علوم متكاملة</td><td>-</td><td>عربي</td><td>-</td><td>دين</td><td>-</td><td>إنجليزي</td></tr>[span_44](end_span)
+                    <tr><td>الاثنين</td><td>ألعاب</td><td>تاريخ</td><td>-</td><td>فلسفة</td><td>-</td><td>رياضة</td><td>-</td></tr>
+                    <tr><td>الثلاثاء</td><td>إنجليزي</td><td>-</td><td>البرمجة</td><td>علوم متكاملة</td><td>-</td><td>عربي</td><td>-</td></tr>
+                    <tr><td>الأربعاء</td><td>رياضة</td><td>-</td><td>فلسفة</td><td>-</td><td>فرنساوي</td><td>-</td><td>نشاط</td></tr>
+                    [span_45](start_span)<tr><td>الخميس</td><td>تاريخ</td><td>-</td><td>علوم متكاملة</td><td>-</td><td>البرمجة</td><td>-</td><td>عربي</td></tr>[span_45](end_span)
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        [span_46](start_span)<div class="card-title"><i class="fas fa-users"></i> كشف أسماء الطلاب</div>[span_46](end_span)
+        <span class="student-count" id="countDisplay">عدد الطلاب: 0</span>
+        [span_47](start_span)<input type="text" class="search-input" id="nameSearch" placeholder="ابحث عن اسم طالب...">[span_47](end_span)
+        [span_48](start_span)<div class="names-grid" id="namesList"></div>[span_48](end_span)
+    </div>
+</div>
+
+<div class="nav-bottom">
+    [span_49](start_span)<a href="https://wa.me/201011064473" class="nav-item"><i class="fab fa-whatsapp"></i>تواصل</a>[span_49](end_span)
+    [span_50](start_span)<a href="#" class="nav-item active"><i class="fas fa-home"></i>الرئيسية</a>[span_50](end_span)
+    <a href="javascript:location.reload();" class="nav-item"><i class="fas fa-sync"></i>تحديث</a>
+</div>
+
+<script>
+    // قائمة الأسماء الصحيحة
+    const names = [
+        "محمد سيد محمد أحمد حسين", "محمد شريف شوقي علي محمود", "محمد عاشور سعد أمين غريب", 
+        "محمد عاطف محمد جاد محمد", "محمد عرفات حسين محمود شلبي", "محمد علي حسن محمد مشحوت", 
+        "محمد علي سيد علي إبراهيم", "محمد علي شاهين علي محمود", "محمد فايز محمد فراج عبد الكريم", 
+        "محمد محمود منصور حسين منظور", "محمد مشهور يونس أبو زيد جبر", "محمد وحيد عبد المنعم بيومي", 
+        "محمود حسين محمود محمد حسانين", "محمود حماد حمزة محمد عوض الله", "محمود راضي سعيد سيف محمد", 
+        "مريم رمضان حسين عبد ربه محمود", "مريم رمضان عبد الرحمن أبو سريع داود", "مريم طارق سعيد أحمد سيد", 
+        "مريم عبد المنعم عبد الرؤوف مشرف الحاج", "مريم عصام رمضان أحمد حسين", "مريم محمد سعيد عبد الونيس سعيد", 
+        "مريم محمود زكريا سيد محمد", "مريم نشأت إبراهيم توفيق محمد", "مريم هاني سمير أمين برسوم", 
+        "ملك أحمد أحمد عوض الله عبد المقصود", "ملك أحمد جمعة عبد العليم إسماعيل", "ملك أحمد صلاح عبد الكريم درويش", 
+        "ملك أحمد كمال عبد الله علي", "ملك أحمد محمد عبد الغني علي", "ملك أسامة سيد سلامة قاسم", 
+        "ملك أيمن سلامة سيف محمد", "ملك حسين ماضي حسن محمد", "ملك رامي أحمد أحمد درغام", 
+        "ملك زكريا توفيق محمود أحمد", "ملك سامي عز الدين عبد الفتاح خطاب", "ملك سعد محمد حماد محمد", 
+        "ملك سعيد محمد زناتي", "ملك سيد محمد بكري شافعي", "ملك شعبان عبد الظاهر حسن عويس", 
+        "ملك صبري أحمد مرزوق عويس", "ملك عصام محمد عبد الحميد", "ملك عماد فتحي محمد عبود", 
+        [span_51](start_span)"ملك عمرو ثابت عبد العال", "ملك محسن عبده إسماعيل عبد ربه"[span_51](end_span)
+    ];
+
+    [span_52](start_span)const listDiv = document.getElementById('namesList');[span_52](end_span)
+    const countDisplay = document.getElementById('countDisplay');
+
+    // دالة عرض الأسماء
+    function displayNames(filteredNames) {
+        listDiv.innerHTML = filteredNames.map(n => `<div class="name-tag">${n}</div>`).join('');
+        [span_53](start_span)countDisplay.innerText = `عدد الطلاب: ${filteredNames.length}`;[span_53](end_span)
+    }
+
+    // دالة تنظيف النصوص للبحث الذكي
+    function normalizeArabic(text) {
+        return text.replace(/[أإآا]/g, 'ا').replace(/[ةه]/g, 'ه').replace(/[ىي]/g, 'ي').trim();
+    }
+
+    // نظام البحث
+    document.getElementById('nameSearch').addEventListener('input', (e) => {
+        [span_54](start_span)const term = normalizeArabic(e.target.value);[span_54](end_span)
+        const filtered = names.filter(n => normalizeArabic(n).includes(term));
+        displayNames(filtered);
+    });
+
+    // نظام حفظ الصلوات
+    const prayerBoxes = document.querySelectorAll('.prayer-box');
+    
+    prayerBoxes.forEach(box => {
+        const checkbox = box.querySelector('input');
+        const prayerName = checkbox.dataset.prayer;
+
+        // استرجاع الحالة من الذاكرة
+        if(localStorage.getItem(prayerName) === 'true') {
+            checkbox.checked = true;
+            box.classList.add('active');
+        }
+
+        box.addEventListener('click', () => {
+            checkbox.checked = !checkbox.checked;
+            box.classList.toggle('active', checkbox.checked);
+            localStorage.setItem(prayerName, checkbox.checked);
+        });
+    });
+
+    // العرض الأولي
+    displayNames(names);
+</script>
+
+</body>
+</html>
